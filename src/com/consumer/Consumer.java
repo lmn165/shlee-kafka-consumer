@@ -24,11 +24,11 @@ public class Consumer {
 		prop.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
 		KafkaConsumer<String, String> consumer = null;
-		consumer = new KafkaConsumer<>(prop);
-		consumer.subscribe(Collections.singletonList(TOPIC));
-
 		String message = null;
+
 		try {
+			consumer = new KafkaConsumer<>(prop);
+			consumer.subscribe(Collections.singletonList(TOPIC));
 			do {
 				ConsumerRecords<String, String> records = consumer.poll(1000000);
 
