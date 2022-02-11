@@ -24,7 +24,7 @@ public class JSONConsumer {
 		try {
 			Reader reader = Resources.getResourceAsReader(resource);
 			properties.load(reader);
-			properties.put("group.id", "group01");
+			properties.put("group.id", (args.length==0 ? "group01" : args[0]));
 			
 			consumer = new KafkaConsumer<>(properties);
 			consumer.subscribe(Collections.singletonList(TOPIC));
