@@ -19,7 +19,7 @@ public class JSONConsumer {
 		Properties properties = new Properties();
 		KafkaConsumer<String, String> consumer = null;
 		JSONParser jsonParser = new JSONParser();
-		String message = null;
+//		String message = null;
 		
 		try {
 			Reader reader = Resources.getResourceAsReader(resource);
@@ -31,9 +31,9 @@ public class JSONConsumer {
 			while (true) {
 				ConsumerRecords<String, String> records = consumer.poll(1000000);
 				for (ConsumerRecord<String, String> record : records) {
-					message = record.value();
-					if(properties.getProperty("ExitMessage").equals(message)) System.exit(0);
-					JSONObject jsonObj= (JSONObject) jsonParser.parse(message);
+//					message = record.value();
+//					if(properties.getProperty("ExitMessage").equals(message)) System.exit(0);
+					JSONObject jsonObj= (JSONObject) jsonParser.parse(record.value());
 					jsonObj.keySet().forEach(val -> System.out.printf("%s : %s\n", val, jsonObj.get(val)));
 					System.out.println("");
 				}
